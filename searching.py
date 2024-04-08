@@ -39,13 +39,23 @@ def linear_search(prohledavana_sekvence, hledane_cislo):
     return {"positions": pozice, "count": pocet_vyskytu}
 
 
+def pattern_search(prohledavana_sekvence, hledany_vzor):
+    pozice = set()
+    delka_vzoru = len(hledany_vzor)
+    delka_sekvence = len(prohledavana_sekvence)
+    for i in range(delka_sekvence - delka_vzoru + 1):
+        if prohledavana_sekvence[i:delka_vzoru + i] == hledany_vzor:
+            pozice.add((i + delka_vzoru)/2)
+    return pozice
 
 
 
 def main():
     sequential_data = read_data("sequential.json", "unordered_numbers")
     print("Sequential Data:", sequential_data)
-
+    with open("sequential.json", "r") as data_file:
+        dat = json.load(data_file)
+    overeni = pattern_search(dat["dna_sequence", "ATA"])
 
 if __name__ == '__main__':
     main()
