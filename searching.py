@@ -48,6 +48,30 @@ def pattern_search(prohledavana_sekvence, hledany_vzor):
             pozice.add((i + delka_vzoru)/2)
     return pozice
 
+def binary_search(prohledavany_seznam, hledane_cislo):
+    # rozdelim na pulku a zjistuju jestli neni presne v polovine, potom zjistim ve ktere polovine je a jdu znova
+    delka_seznamu = len(prohledavany_seznam)
+    middle = int(delka_seznamu/2)
+    #if middle == hledane_cislo:
+    #    return middle
+    #while middle != hledane_cislo:
+    left, right = 0, len(prohledavany_seznam) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if prohledavany_seznam[mid] == hledane_cislo:
+            return mid
+        elif prohledavany_seznam[mid] < prohledavany_seznam:
+            left = mid + 1
+        else:
+            right = mid - 1
+        return None
+
+
+
+
+
+
+
 
 
 def main():
@@ -55,7 +79,9 @@ def main():
     print("Sequential Data:", sequential_data)
     with open("sequential.json", "r") as data_file:
         dat = json.load(data_file)
-    overeni = pattern_search(dat["dna_sequence", "ATA"])
+    overeni_pattern = pattern_search(dat["dna_sequence", "ATA"])
+    overeni_binary = binary_search(dat["ordered_numbers", 45])
+
 
 if __name__ == '__main__':
     main()
